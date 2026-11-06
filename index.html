@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daniel Araujo Portfólio</title>
+<meta name="description" content="Daniel Araujo, analista de growth. Projetos, sobre e contato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  /* Formato inspirado na referência: creme e quase preto, Geist com espaçamento apertado, rótulos em mono, títulos em dois tons, projetos numerados em lista com divisórias e seções escuras para Sobre e Contato. */
+  :root {
+    --creme: #f9efe7; --creme-2: #efe2d6; --tinta: #1c1c1b; --tinta-2: #5f5a55; --cinza: #8d867f; --escuro: #1c1c1b; --linha: rgba(28, 28, 27, .14);
+    --sans: Geist, "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: "Geist Mono", ui-monospace, Consolas, monospace;
+    --lado: max(20px, env(safe-area-inset-left, 0px), 3.2vw);
+    --foco: var(--tinta);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; background: var(--creme); }
+  body { margin: 0; background: var(--creme); color: var(--tinta); font: 500 17px/1.5 var(--sans); letter-spacing: -.02em; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p, dl, dd { margin: 0; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  :focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
+  .rotulo { font: 400 12px/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+  .tom2 { color: var(--cinza); }
+
+  /* Botões: pequenos e retos, como na referência. */
+  .botao { display: inline-flex; align-items: center; justify-content: center; gap: .45em; min-height: 40px; padding: 0 14px; border-radius: 3px; font: 600 15px/1 var(--sans); letter-spacing: -.02em; text-decoration: none; white-space: nowrap; border: 0; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  .b-escuro { background: var(--tinta); color: var(--creme); }
+  .b-escuro:hover { background: #3a3936; }
+  .b-claro { background: var(--creme); color: var(--tinta); }
+  .b-claro:hover { background: var(--creme-2); }
+  .b-linha { box-shadow: inset 0 0 0 1.5px var(--tinta); color: var(--tinta); }
+  .b-linha:hover { background: var(--tinta); color: var(--creme); }
+  .seta { width: .8em; height: .8em; flex: none; }
+
+  /* Topo fixo. */
+  .topo { position: sticky; top: 0; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 14px var(--lado); background: rgba(249, 239, 231, .86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .nome { font-weight: 600; font-size: 17px; text-decoration: none; }
+  .menu { display: flex; gap: 22px; font-weight: 600; font-size: 16px; }
+  .menu a { text-decoration: none; }
+  .menu a:hover { color: var(--tinta-2); }
+  .acoes { display: flex; gap: 8px; justify-self: end; }
+
+  /* Abertura: holograma em tons de creme, frase grande em dois tons e o nome gigante no pé. */
+  .hero { position: relative; isolation: isolate; min-height: calc(100svh - 68px); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr auto; overflow: hidden; margin-top: -68px; padding: calc(68px + clamp(40px, 12vh, 150px)) var(--lado) clamp(16px, 2.4vw, 36px); }
+  #fundo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; pointer-events: none; }
+  /* Grão de papel por cima do relevo, em resolução cheia. */
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .5; mix-blend-mode: multiply; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .46  0 0 0 .16 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>"); }
+  .hero-texto { justify-self: end; align-self: start; width: min(100%, 44rem); display: grid; gap: 22px; }
+  .hero h1 { font-weight: 600; font-size: clamp(30px, 3.4vw, 48px); line-height: 1.1; letter-spacing: -.045em; text-wrap: balance; }
+  /* O nome ocupa a largura inteira entre as margens: o script calcula o tamanho exato da fonte. */
+  .gigante { margin: clamp(40px, 6vh, 80px) 0 0; font-weight: 600; font-size: 15vw; line-height: 1.02; letter-spacing: -.06em; white-space: nowrap; color: var(--tinta); user-select: none; min-width: 0; overflow: hidden; }
+  .gigante span { display: inline-block; }
+
+  /* Projetos: rótulo fixo à esquerda e lista numerada com divisórias. */
+  .projetos { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 10fr); gap: 0 clamp(24px, 3vw, 48px); padding: clamp(72px, 9vw, 140px) var(--lado); }
+  .projetos > .rotulo-sec { position: sticky; top: 92px; align-self: start; font-weight: 600; font-size: 18px; }
+  .lista { list-style: none; margin: 0; padding: 0; }
+  .projeto { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 4fr); gap: clamp(24px, 3vw, 48px); padding-block: clamp(32px, 4vw, 56px); border-top: 1px solid var(--linha); }
+  .projeto:first-child { border-top: 0; padding-top: 0; }
+  .capa { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px; }
+  .projeto-texto { display: grid; gap: 14px; align-content: start; justify-items: start; }
+  .projeto-texto h2 { font-weight: 600; font-size: clamp(30px, 3vw, 46px); line-height: 1.05; letter-spacing: -.05em; }
+  .projeto-texto p { color: var(--tinta-2); text-wrap: pretty; max-width: 32em; }
+  .objetivo { font-size: 15px; }
+  .objetivo b { font-weight: 600; color: var(--tinta); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .tag { padding: 5px 9px; border-radius: 3px; background: var(--creme-2); font: 500 13px/1 var(--sans); letter-spacing: -.01em; }
+  .ver { margin-top: 10px; }
+
+  /* Seções escuras. */
+  .escuro { background: var(--escuro); color: var(--creme); --foco: var(--creme); }
+  .escuro .tom2 { color: #8a8580; }
+  .sobre { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 96px); align-items: end; padding: clamp(80px, 10vw, 160px) var(--lado); }
+  .sobre img { width: 100%; border-radius: 3px; }
+  .sobre-texto { display: grid; gap: 22px; }
+  .sobre h2, .contato h2 { font-weight: 600; font-size: clamp(36px, 5.2vw, 84px); line-height: 1.02; letter-spacing: -.055em; text-wrap: balance; }
+  .sobre p { max-width: 40em; color: #d9cfc6; text-wrap: pretty; }
+  .contato { display: grid; justify-items: start; gap: 22px; padding: clamp(80px, 10vw, 160px) var(--lado); border-top: 1px solid rgba(249, 239, 231, .12); }
+  .contato .linha-email { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 8px; }
+  .email { font-weight: 600; font-size: clamp(20px, 2.4vw, 32px); letter-spacing: -.04em; overflow-wrap: anywhere; text-underline-offset: 6px; text-decoration-thickness: 1.5px; }
+
+  /* Rodapé. */
+  .rodape { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px clamp(24px, 3vw, 48px); padding: clamp(56px, 7vw, 96px) var(--lado) 28px; }
+  .rodape .col { display: grid; gap: 22px; align-content: start; }
+  .rodape .grandes { display: grid; gap: 2px; font-weight: 600; font-size: clamp(26px, 2.6vw, 40px); line-height: 1.15; letter-spacing: -.05em; }
+  .rodape .grandes a { display: inline-flex; align-items: center; gap: .2em; text-decoration: none; width: fit-content; }
+  .rodape .grandes a:hover { color: var(--tinta-2); }
+  .rodape .topo-link { margin-top: 26px; }
+  .base { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 24px; border-top: 1px solid var(--linha); color: var(--tinta-2); }
+
+  @media (max-width: 900px) {
+    .projetos { grid-template-columns: minmax(0, 1fr); }
+    .projetos > .rotulo-sec { position: static; margin-bottom: 28px; }
+    .projeto { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .sobre { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .sobre img { max-width: 460px; }
+  }
+  @media (max-width: 720px) {
+    .topo { grid-template-columns: 1fr auto; padding-block: 10px; }
+    .menu { display: none; }
+    .acoes .botao { padding: 0 10px; font-size: 14px; }
+    .acoes .b-linha { display: none; }
+    .hero { margin-top: -60px; }
+    .rodape { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .botao { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="seta" viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></symbol>
+  <symbol id="baixo" viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></symbol>
+  <symbol id="cima" viewBox="0 0 12 12"><path d="M6 10.5V2M2.5 5.5 6 2l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></symbol>
+</svg>
+
+<header class="topo">
+  <a class="nome" href="#inicio">daniel araujo</a>
+  <nav class="menu" aria-label="Seções">
+    <a href="#projetos">Projetos</a>
+    <a href="#sobre">Sobre</a>
+  </nav>
+  <div class="acoes">
+    <a class="botao b-linha curriculo" href="curriculo-daniel-araujo.pdf" download="Curriculo-Daniel-Araujo.pdf">Baixar currículo</a>
+    <a class="botao b-escuro" href="#contato">Entrar em contato <svg class="seta" aria-hidden="true"><use href="#seta"/></svg></a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <canvas id="fundo" aria-hidden="true"></canvas>
+    <div class="hero-texto">
+      <h1>Eu desenho, testo e analiso.<br><span class="tom2">Design, conteúdo e dados para fazer marcas crescerem.</span></h1>
+      <p class="rotulo">Analista de growth</p>
+    </div>
+    <p class="gigante" aria-hidden="true"><span>daniel araujo</span></p>
+  </section>
+
+  <section class="projetos" id="projetos">
+    <h2 class="rotulo-sec">Projetos</h2>
+    <ol class="lista">
+      <li class="projeto" id="fit-urban">
+        <img class="capa" src="capa-fit-urban.jpg" width="1200" height="1200" alt="Capa em azul-turquesa com telas do site da Fit Urban no computador e no celular.">
+        <div class="projeto-texto">
+          <span class="rotulo">01</span>
+          <h2>Fit Urban</h2>
+          <p>Redesenhei o site da Fit Urban, e-commerce de moda fitness: da pesquisa com usuários ao design system e às telas, validadas em testes.</p>
+          <p class="objetivo"><b>Objetivo:</b> destravar o fluxo de compra do site.</p>
+          <div class="tags"><span class="tag">UX/UI</span><span class="tag">Figma</span></div>
+          <a class="botao b-escuro ver" href="fit-urban.html">Ver projeto completo <svg class="seta" aria-hidden="true"><use href="#seta"/></svg></a>
+        </div>
+      </li>
+      <li class="projeto" id="alento">
+        <img class="capa" src="capa-alento.jpg" width="1080" height="1080" loading="lazy" alt="Fachada de um estúdio com o logo da Alento e a placa Pilates e Bem-estar, com aparelhos de pilates visíveis pela vitrine.">
+        <div class="projeto-texto">
+          <span class="rotulo">02</span>
+          <h2>Alento</h2>
+          <p>Identidade visual para um estúdio de pilates e bem-estar. O logo une um corpo em alongamento a um arco e flecha: puxar o arco é inspirar, soltar a flecha é expirar.</p>
+          <p class="objetivo"><b>Objetivo:</b> criar um símbolo que vai inspirar uma comunidade.</p>
+          <div class="tags"><span class="tag">Identidade visual</span><span class="tag">Illustrator</span><span class="tag">Photoshop</span></div>
+          <a class="botao b-escuro ver" href="alento.html">Ver projeto completo <svg class="seta" aria-hidden="true"><use href="#seta"/></svg></a>
+        </div>
+      </li>
+      <li class="projeto" id="videos">
+        <img class="capa" src="capa-videos.jpg" width="1200" height="1200" loading="lazy" alt="Capa com três quadros dos vídeos: fisioterapeuta falando sobre pilates, cliente dando depoimento e apresentadora falando sobre pijamas.">
+        <div class="projeto-texto">
+          <span class="rotulo">03</span>
+          <h2>Roteiros, captações e edições</h2>
+          <p>Vídeos curtos para redes sociais, do roteiro à edição: conteúdo educativo, depoimentos e análises sobre o varejo de pijamas.</p>
+          <p class="objetivo"><b>Objetivo:</b> explicar, gerar confiança e atrair clientes com vídeos curtos.</p>
+          <div class="tags"><span class="tag">Vídeo</span><span class="tag">Premiere</span></div>
+          <a class="botao b-escuro ver" href="videos.html">Ver projeto completo <svg class="seta" aria-hidden="true"><use href="#seta"/></svg></a>
+        </div>
+      </li>
+      <li class="projeto" id="reservatorio">
+        <img class="capa" src="capa-rd.jpg" width="1200" height="1200" loading="lazy" alt="Capa em vermelho com o título Reservatório de Dopamina, o gorila do projeto sorrindo e apontando para um balão vermelho.">
+        <div class="projeto-texto">
+          <span class="rotulo">04 · Projeto de estudo</span>
+          <h2>Reservatório de Dopamina</h2>
+          <p>Animações 2D curtas que explicam, em linguagem simples, o conteúdo do Reservatório de Dopamina para quem ainda não entende o que o Eslen Delanogare fala.</p>
+          <p class="objetivo"><b>Objetivo:</b> canal de aquisição para público frio.</p>
+          <div class="tags"><span class="tag">Animação 2D</span><span class="tag">Claude</span><span class="tag">ElevenLabs</span></div>
+          <a class="botao b-escuro ver" href="reservatorio.html">Ver projeto completo <svg class="seta" aria-hidden="true"><use href="#seta"/></svg></a>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="sobre escuro" id="sobre">
+    <img src="foto.jpg" width="960" height="1045" loading="lazy" alt="Foto de Daniel Araujo, de suéter azul-claro, sorrindo levemente, em um fundo escuro.">
+    <div class="sobre-texto">
+      <span class="rotulo">Sobre mim</span>
+      <h2>Vim do design.<br><span class="tom2">Hoje cuido do growth.</span></h2>
+      <p>Sou analista de growth marketing e vim do design. São mais de 4 anos em marketing digital, entre agência, e-commerce e minha própria empresa. Hoje, na Scart Company, cuido do growth dos clientes: conteúdo para Instagram, criativos de Meta Ads, identidade visual e estratégia de marca.</p>
+      <p>Na Agência Oásis, criei anúncios, vídeos e peças para várias marcas. Na Fit Urban, um e-commerce de moda fitness, fiz e-mail marketing e conteúdo, desenhei a UX/UI do site, apliquei SEO e rodei testes A/B, trabalhando direto com a diretoria nas decisões de marketing.</p>
+      <p>Uso GA4, Google Tag Manager e Microsoft Clarity para entender os dados, e RD Station e Edrone para CRM e automação. Como junto design e estratégia, consigo levar uma ideia do número até a peça no ar.</p>
+    </div>
+  </section>
+
+  <section class="contato escuro" id="contato">
+    <span class="rotulo">Contato</span>
+    <h2>Entrar em contato.<br><span class="tom2">Me mande um e-mail.</span></h2>
+    <div class="linha-email">
+      <a class="email" id="email" href="mailto:danielaraujosilva66@gmail.com">danielaraujosilva66@gmail.com</a>
+      <button class="botao b-claro" type="button" id="copiar">Copiar e-mail</button>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="col">
+    <span class="rotulo">Navegação</span>
+    <div class="grandes">
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+      <a class="topo-link" href="#inicio">Voltar ao topo <svg class="seta" aria-hidden="true"><use href="#cima"/></svg></a>
+    </div>
+  </div>
+  <div class="col">
+    <span class="rotulo">Contato</span>
+    <div class="grandes">
+      <a href="mailto:danielaraujosilva66@gmail.com">E-mail <svg class="seta" aria-hidden="true"><use href="#seta"/></svg></a>
+      <a class="curriculo" href="curriculo-daniel-araujo.pdf" download="Curriculo-Daniel-Araujo.pdf">Currículo <svg class="seta" aria-hidden="true"><use href="#baixo"/></svg></a>
+    </div>
+  </div>
+  <div class="base rotulo"><span>©2026 Daniel Araujo</span><span>Analista de growth</span></div>
+</footer>
+
+<script>
+  (function () {
+    /* Nome gigante: mede o texto e ajusta a fonte para encostar nas duas margens. */
+    var gigante = document.querySelector('.gigante');
+    var nomeSpan = gigante.querySelector('span');
+    function encaixar() {
+      gigante.style.fontSize = '100px';
+      var w = nomeSpan.getBoundingClientRect().width;
+      if (w) gigante.style.fontSize = (100 * gigante.clientWidth / w) + 'px';
+    }
+    encaixar();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(encaixar);
+    new ResizeObserver(encaixar).observe(gigante);
+    window.addEventListener('resize', encaixar);
+
+    var copiar = document.getElementById('copiar');
+    var email = document.getElementById('email');
+    function selecionar() {
+      var r = document.createRange();
+      r.selectNodeContents(email);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      copiar.textContent = 'Selecionado: use Ctrl+C';
+    }
+    copiar.addEventListener('click', function () {
+      if (!navigator.clipboard) { selecionar(); return; }
+      navigator.clipboard.writeText(email.textContent).then(function () {
+        copiar.textContent = 'E-mail copiado';
+      }).catch(selecionar);
+    });
+
+    /* Currículo: dentro do Claude o download passa pela capacidade downloads; fora dele, o link baixa o PDF direto. */
+    var downloads = null;
+    if (window.claude && claude.use) {
+      claude.use('downloads').then(function (d) { downloads = d; }).catch(function () {});
+    }
+    document.querySelectorAll('.curriculo').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (!downloads) return;
+        e.preventDefault();
+        fetch(link.getAttribute('href')).then(function (r) {
+          if (!r.ok) throw new Error('fetch');
+          return r.blob();
+        }).then(function (blob) {
+          return downloads.save({ filename: link.getAttribute('download'), data: blob });
+        }).catch(function (err) {
+          if (err && (err.code === 'declined' || err.code === 'rate_limited')) return;
+          window.open(link.href, '_blank', 'noopener');
+        });
+      });
+    });
+  })();
+</script>
+
+<script>
+  /* Fundo da abertura: uma superfície em relevo, como tecido em creme, com duas dobras que fluem devagar, luz de lado, grão e um relevo que segue o mouse. Para quando sai da tela. */
+  (function () {
+    var tela = document.getElementById('fundo');
+    var gl = tela.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
+    if (!gl) return;
+
+    var vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var fs = [
+      'precision highp float;',
+      'uniform vec2 r;uniform float t;',
+      'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+      'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*f*(f*(f*6.-15.)+10.);',
+      'return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}',
+      'float b(vec2 p){float v=0.,a=.5;for(int i=0;i<3;i++){v+=a*n(p);p=mat2(.8,.6,-.6,.8)*p*2.;a*=.5;}return v;}',
+      'uniform vec2 m;',
+      /* Altura da superfície: duas dobras largas em curva, deformadas por ruído lento, mais um relevo suave onde está o mouse. */
+      'float rib(vec2 p,float T){float y=.32*sin(p.x*1.25+T)+.12*sin(p.x*2.7-T*1.4);float d=p.y-y;return exp(-d*d*3.2);}',
+      'float alt(vec2 p,float T){vec2 w=p+.35*vec2(b(p*.9+vec2(T*.6,0.))-.5,b(p*.9+vec2(4.,-T*.5))-.5);',
+      'vec2 a=mat2(.82,.57,-.57,.82)*(w-vec2(-.55,.55));vec2 c=mat2(.7,-.71,.71,.7)*(w-vec2(.9,-.7));',
+      'float g=rib(a,T)+.55*rib(c*1.3,T*.8+2.);vec2 dm=p-m;return g+.45*exp(-dot(dm,dm)*5.);}',
+      'void main(){',
+      'vec2 p=(gl_FragCoord.xy-.5*r)/r.y*2.;float T=t*.12;',
+      'float e=.004;float hx=alt(p+vec2(e,0.),T)-alt(p-vec2(e,0.),T);float hy=alt(p+vec2(0.,e),T)-alt(p-vec2(0.,e),T);',
+      'vec3 n=normalize(vec3(-hx/e*.22,-hy/e*.22,1.));',
+      'vec3 L=normalize(vec3(-.55,.65,.75));float dif=dot(n,L);',
+      'float bri=pow(max(dot(reflect(-L,n),vec3(0.,0.,1.)),0.),14.);',
+      'vec3 cr=vec3(.976,.937,.906);',
+      'float s=clamp(.5+(dif-.72)*2.4,0.,1.);',
+      'vec3 col=mix(cr*.885,cr*1.015,s)+vec3(1.,.99,.97)*bri*.05;',
+      'col=mix(col,cr,smoothstep(-.45,-.98,p.y));',
+      'gl_FragColor=vec4(col,1.);}'
+    ].join('\n');
+
+    function shader(tipo, fonte) {
+      var s = gl.createShader(tipo);
+      gl.shaderSource(s, fonte);
+      gl.compileShader(s);
+      return s;
+    }
+    var prog = gl.createProgram();
+    gl.attachShader(prog, shader(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+    gl.useProgram(prog);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var pos = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+    var uR = gl.getUniformLocation(prog, 'r');
+    var uT = gl.getUniformLocation(prog, 't');
+    var uM = gl.getUniformLocation(prog, 'm');
+
+    var parado = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var inicio = performance.now();
+    var pedido = 0;
+    var visivel = true;
+    /* Mouse: o relevo segue o ponteiro com atraso suave; sem ponteiro, ele fica fora da tela. */
+    var alvo = [4, 4], atual = [4, 4];
+    tela.parentElement.addEventListener('pointermove', function (ev) {
+      var q = tela.getBoundingClientRect();
+      alvo[0] = ((ev.clientX - q.left) - q.width / 2) / q.height * 2;
+      alvo[1] = -((ev.clientY - q.top) - q.height / 2) / q.height * 2;
+    });
+    tela.parentElement.addEventListener('pointerleave', function () { alvo = [4, 4]; });
+
+    function desenhar(agora) {
+      atual[0] += (alvo[0] - atual[0]) * .05;
+      atual[1] += (alvo[1] - atual[1]) * .05;
+      gl.uniform2f(uM, atual[0], atual[1]);
+      gl.uniform1f(uT, parado.matches ? 40 : (agora - inicio) / 1000 + 40);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    function ajustar() {
+      var w = Math.max(1, Math.round(tela.clientWidth * .5));
+      var a = Math.max(1, Math.round(tela.clientHeight * .5));
+      if (tela.width === w && tela.height === a) return;
+      tela.width = w;
+      tela.height = a;
+      gl.viewport(0, 0, w, a);
+      gl.uniform2f(uR, w, a);
+      desenhar(performance.now());
+    }
+    function quadro(agora) {
+      desenhar(agora);
+      pedido = requestAnimationFrame(quadro);
+    }
+    function atualizar() {
+      cancelAnimationFrame(pedido);
+      pedido = 0;
+      if (parado.matches) { desenhar(performance.now()); return; }
+      if (!document.hidden && visivel) pedido = requestAnimationFrame(quadro);
+    }
+
+    ajustar();
+    new ResizeObserver(ajustar).observe(tela);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (itens) { visivel = itens[0].isIntersecting; atualizar(); }).observe(tela);
+    }
+    document.addEventListener('visibilitychange', atualizar);
+    if (parado.addEventListener) parado.addEventListener('change', atualizar);
+    atualizar();
+  })();
+</script>
+</body>
+</html>

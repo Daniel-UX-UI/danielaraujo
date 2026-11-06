@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reservatório de Dopamina</title>
+<meta name="description" content="Projeto de Daniel Araujo: animações 2D que explicam o conteúdo do Reservatório de Dopamina para um público novo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+<style>
+  /* Cada seção repete uma tela da apresentação. No computador, tudo escala com a largura da janela; no celular, texto e imagem empilham. */
+  :root { color-scheme: light; --azul: #1f4ed8; --vermelho: #cf2323; --preto: #0a0a0a; --branco: #ffffff; --display: Georgia, "Times New Roman", serif; --sans: Inter, "Segoe UI", system-ui, -apple-system, sans-serif; --texto: clamp(17px, 1.56vw, 30px); --titulo: clamp(42px, 4.6vw, 88px); --lateral: clamp(16px, 6.9vw, 132px); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--branco); color: var(--preto); font: 400 var(--texto)/1.32 var(--sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, p, ol { margin: 0; }
+  h1, h2 { font-family: var(--display); font-weight: 400; font-size: var(--titulo); line-height: 1.1; text-wrap: balance; }
+  img, video { display: block; max-width: 100%; height: auto; }
+  strong { font-weight: 600; }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+  .tela { position: relative; overflow: hidden; }
+  .azul { background: var(--azul); color: var(--branco); }
+  .quadro { max-width: 1920px; min-height: min(56.25vw, 1080px); margin-inline: auto; display: grid; align-items: center; }
+  .dupla { grid-template-columns: 38.28% 59.63%; }
+  .dupla .texto { padding-left: var(--lateral); padding-right: 8px; }
+  .dupla img { width: 100%; }
+  .texto { display: grid; gap: 1.1em; min-width: 0; }
+  .texto p { text-wrap: pretty; }
+  .texto h2 { margin-bottom: .1em; }
+
+  .central { justify-items: center; align-content: center; text-align: center; padding: 48px 16px; }
+  .central > * { max-width: 29em; }
+  .balao { width: clamp(120px, 10.4vw, 200px); }
+  .central h1, .central h2 { max-width: none; margin-top: -.1em; }
+  h1 { color: var(--vermelho); font-weight: 700; }
+  .abertura p { margin-top: 1.1em; }
+  .selos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6em; margin-top: 2em; font-weight: 600; }
+  .selo { padding: .4em 1.2em; border-radius: 6px; color: var(--branco); }
+  .s-claude { background: #d96b45; }
+  .s-eleven { background: #333333; }
+  .voltar { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 6px; background: var(--azul); color: var(--branco); font: 600 15px/20px var(--sans); text-decoration: none; white-space: nowrap; transition: background-color .15s ease; }
+  .voltar:hover { background: #163aa3; }
+  .tela > .voltar { position: absolute; z-index: 1; top: 16px; left: max(16px, env(safe-area-inset-left, 0px)); }
+
+  .nestle { grid-template-columns: 47% 53%; }
+  .nestle .esq { display: grid; gap: 1.2em; padding-left: var(--lateral); min-width: 0; }
+  .nestle .esq img { width: 87%; }
+  .nestle .texto { padding-right: var(--lateral); padding-left: 2.2vw; }
+  .nestle ol { padding-left: 1.5em; }
+
+  .universo-pc { width: 100%; max-width: 1920px; margin-inline: auto; }
+  .universo { display: none; gap: 32px; padding: 56px max(16px, env(safe-area-inset-left, 0px)); }
+  .universo h2 { text-align: center; }
+  .universo figure { margin: 0; display: grid; gap: .6em; min-width: 0; }
+  .universo figure img { width: 100%; }
+  .universo figcaption { font-weight: 600; font-size: 1.3em; }
+
+  .ideia p + p { margin-top: 1em; }
+  .ideia > p { margin-top: 1em; }
+  .ideia a { color: inherit; text-underline-offset: 3px; }
+
+  .animacoes { display: grid; justify-items: center; gap: 32px; padding: clamp(48px, 6vw, 96px) 16px; text-align: center; }
+  .videos { display: grid; grid-template-columns: repeat(3, minmax(0, 360px)); justify-content: center; gap: clamp(16px, 2vw, 32px); width: 100%; }
+  .animacoes video { width: 100%; aspect-ratio: 9 / 16; border-radius: 6px; background: #000; }
+
+  @media (max-width: 760px) {
+    .quadro { min-height: 0; }
+    .dupla, .nestle { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 48px 24px; }
+    .dupla .texto, .nestle .esq, .nestle .texto { padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
+    .nestle .esq img { width: 100%; }
+    .nestle { padding-bottom: 48px; }
+    .central { padding-block: 72px; }
+    .universo-pc { display: none; }
+    .universo { display: grid; }
+    .videos { grid-template-columns: minmax(0, 340px); }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="tela">
+    <a class="voltar" href="index.html">Voltar para o portfólio</a>
+    <div class="quadro central abertura">
+      <img class="balao" src="rd-balao.jpg" width="200" height="200" alt="">
+      <h1>Reservatório de Dopamina</h1>
+      <p>Animações 2D curtas que explicam, em linguagem simples, o conteúdo do Reservatório de Dopamina para quem ainda não entende o que Eslen Delanogare ensina.</p>
+      <div class="selos">
+        <span class="selo s-claude">Claude</span>
+        <span>+</span>
+        <span class="selo s-eleven">ElevenLabs</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <div class="quadro dupla">
+      <div class="texto">
+        <h2>Insight</h2>
+        <p>Eu sou aluno do RD há mais de 3 anos. Mas, no começo, não compreendia direito o que o Eslen falava.</p>
+        <p><strong>E se, assim como eu, existissem outras pessoas passando pela mesma situação?</strong></p>
+        <p>Como podemos chegar até essas pessoas que ainda não sabem que precisam do Reservatório?</p>
+      </div>
+      <img src="rd-insight.jpg" width="1145" height="945" alt="Duas fotos de Eslen Delanogare: correndo em uma estrada e falando para a câmera em frente a uma estante de livros, com balões vermelhos nos cantos.">
+    </div>
+  </section>
+
+  <section class="tela">
+    <div class="quadro dupla">
+      <div class="texto">
+        <h2>Solução</h2>
+        <p>A didática dele é ótima, mas, se você puder desenhar, desenhe.</p>
+        <p>Por isso, criei um personagem 2D inspirado no mascote do RD e desenvolvi as animações.</p>
+        <p>Apliquei princípios de Design e Motion que aprendi ao longo de mais de 4 anos de experiência.</p>
+        <p>Mas a direção veio da minha visão sobre o público que ainda podemos explorar.</p>
+      </div>
+      <img src="rd-solucao.jpg" width="1145" height="945" alt="Dois quadros das animações: o gorila em uma poltrona, olhando o celular, com um cérebro em destaque; e o gorila de chapéu e casaco em um cenário do século 19.">
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <div class="quadro nestle">
+      <div class="esq">
+        <h2>Nestlé no Japão</h2>
+        <img src="rd-nestle.jpg" width="636" height="476" alt="Mão segurando uma caixa transparente de balas de café.">
+      </div>
+      <div class="texto">
+        <p>O Japão tinha uma cultura muito forte de consumo de chá, e o café não fazia parte dos hábitos de grande parte da população. A Nestlé tentava vender café instantâneo, mas enfrentava resistência.</p>
+        <p><strong>Na década de 1970</strong>, a empresa teria recorrido ao consultor de marketing <strong>Clotaire Rapaille</strong>, que identificou uma barreira: as pessoas não tinham memórias afetivas de infância ligadas ao café.</p>
+        <p><strong>A estratégia proposta foi diferente:</strong></p>
+        <ol>
+          <li>Em vez de insistir em vender café para adultos, introduzir o sabor do café para crianças.</li>
+          <li>Fazer isso por meio de doces, chocolates e sobremesas com sabor de café.</li>
+          <li>Criar familiaridade e associações positivas com aquele sabor.</li>
+          <li>Esperar que, quando essas crianças crescessem, tivessem mais abertura para consumir café.</li>
+        </ol>
+        <p><strong>Ela estava tentando formar um hábito futuro.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela">
+    <div class="quadro dupla">
+      <div class="texto">
+        <h2>Pais e Filhos</h2>
+        <p>E se, além de sermos mais “simples” para um público mais frio, também fôssemos a porta de entrada para crianças e adolescentes?</p>
+        <p>Eu ainda não sou pai, mas, quando for, <strong>quero transmitir aos meus filhos tudo o que aprendi com o Reservatório de Dopamina.</strong></p>
+        <p>Dessa forma, poderei deixar ferramentas valiosas para que eles aprendam a lidar com o mundo à sua volta.</p>
+      </div>
+      <img src="rd-pais.jpg" width="1145" height="945" alt="Duas fotos: um pai cozinhando com a filha e um pai jogando xadrez com o filho, com balões vermelhos nos cantos.">
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <img class="universo-pc" src="rd-universo.jpg" width="1920" height="1080" alt="Universo RD: o gorila como desenho animado, remando uma canoa, e como pelúcia, segurando um balão vermelho.">
+    <div class="universo">
+      <h2>Universo RD</h2>
+      <figure>
+        <figcaption>Desenhos animados</figcaption>
+        <img src="rd-desenho.jpg" width="758" height="393" alt="">
+      </figure>
+      <figure>
+        <figcaption>Pelúcias</figcaption>
+        <img src="rd-pelucia.jpg" width="634" height="710" alt="">
+      </figure>
+    </div>
+  </section>
+
+  <section class="tela">
+    <div class="quadro central ideia">
+      <img class="balao" src="rd-balao.jpg" width="200" height="200" alt="">
+      <h2>Essa foi a minha ideia.</h2>
+      <p>Eu não sei quais são os objetivos de marca do RD, nem onde vocês querem chegar.</p>
+      <p>Mas acredito que, se esse projeto for bem estudado, pode dar bons frutos no futuro.</p>
+      <p><strong>O que você acha?</strong></p>
+      <p><a href="#animacoes">PS: Vou deixar as animações no próximo slide para os curiosos.</a></p>
+    </div>
+  </section>
+
+  <section class="animacoes" id="animacoes">
+    <h2>Animações</h2>
+    <div class="videos">
+      <video controls playsinline preload="none" width="720" height="1280" poster="rd-celular-e-cerebro-capa.jpg" src="rd-celular-e-cerebro.mp4" aria-label="Episódio Celular e cérebro."></video>
+      <video controls playsinline preload="none" width="720" height="1280" poster="rd-o-homem-que-voltou-outro-capa.jpg" src="rd-o-homem-que-voltou-outro.mp4" aria-label="Episódio O homem que voltou outro, sobre Phineas Gage."></video>
+      <video controls playsinline preload="none" width="720" height="1280" poster="rd-tres-perguntas-capa.jpg" src="rd-tres-perguntas.mp4" aria-label="Episódio Três perguntas."></video>
+    </div>
+    <a class="voltar" href="index.html">Voltar para o portfólio</a>
+  </section>
+</main>
+</body>
+</html>

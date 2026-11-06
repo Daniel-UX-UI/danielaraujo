@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roteiros, captações e edições</title>
+<meta name="description" content="Vídeos de Daniel Araujo para redes sociais, do roteiro à edição.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap">
+<style>
+  /* Mesmo padrão da página do RD: primeira tela explica o trabalho e as seguintes, em branco e azul, mostram os vídeos. */
+  :root { color-scheme: light; --azul: #1c1c1b; --branco: #f9efe7; --preto: #0a0a0a; --display: Geist, "Segoe UI", system-ui, sans-serif; --sans: Geist, "Segoe UI", system-ui, -apple-system, sans-serif; --texto: clamp(17px, 1.56vw, 30px); --titulo: clamp(42px, 4.6vw, 88px); --lateral: clamp(16px, 6.9vw, 132px); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--branco); color: var(--preto); font: 400 var(--texto)/1.32 var(--sans); letter-spacing: -.02em; -webkit-font-smoothing: antialiased; }
+  h1, h2, p { margin: 0; }
+  h1, h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.05em; font-size: var(--titulo); line-height: 1.1; text-wrap: balance; }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+  .tela { position: relative; overflow: hidden; }
+  .azul { background: var(--azul); color: var(--branco); --foco: var(--branco); }
+  .voltar { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 3px; background: var(--azul); color: var(--branco); font: 600 15px/20px var(--sans); text-decoration: none; white-space: nowrap; transition: background-color .15s ease; }
+  .voltar:hover { background: #3a3936; }
+  .tela > .voltar { position: absolute; z-index: 1; top: 16px; left: max(16px, env(safe-area-inset-left, 0px)); }
+
+  .abertura { display: grid; justify-items: center; align-content: center; gap: 1.1em; min-height: min(56.25vw, 1080px); padding: 96px 16px 64px; text-align: center; }
+  .abertura p { max-width: 30em; text-wrap: pretty; }
+  .selos { display: flex; justify-content: center; margin-top: .9em; font-weight: 600; }
+  .selo { padding: .4em 1.2em; border-radius: 3px; background: #1c1c1b; color: var(--branco); }
+
+  .bloco { display: grid; gap: clamp(28px, 3vw, 56px); max-width: 1920px; margin-inline: auto; padding: clamp(56px, 6.5vw, 124px) var(--lateral); }
+  .cabeca { display: grid; gap: .8em; max-width: 34em; }
+  .cabeca p { text-wrap: pretty; }
+  .videos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 28px); }
+  .videos.dois { grid-template-columns: repeat(2, minmax(0, 340px)); }
+  video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: 3px; background: #000; }
+  .dupla { grid-template-columns: minmax(0, 38fr) minmax(0, 62fr); align-items: center; }
+  .dupla .videos { justify-content: end; }
+
+  .fim { display: flex; justify-content: center; padding: 48px 16px; }
+  @media (max-width: 900px) {
+    .videos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dupla { grid-template-columns: minmax(0, 1fr); }
+    .dupla .videos { justify-content: stretch; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .videos, .dupla .videos { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+    video { max-width: 340px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .voltar { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="tela">
+    <a class="voltar" href="index.html">Voltar para o portfólio</a>
+    <div class="abertura">
+      <h1>Roteiros, captações e edições</h1>
+      <p>Vídeos curtos para redes sociais, do roteiro à edição: conteúdo educativo, depoimentos e análises sobre o varejo de pijamas.</p>
+      <div class="selos"><span class="selo">Premiere</span></div>
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <div class="bloco">
+      <div class="cabeca">
+        <h2>Conteúdo educativo</h2>
+        <p>Profissionais de saúde explicam temas do dia a dia da clínica, com legendas dinâmicas e imagens de apoio para facilitar o entendimento.</p>
+      </div>
+      <div class="videos">
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-01-capa.jpg" src="vp-01.mp4" aria-label="Fisioterapeuta da clínica fala sobre tratamento com pressoterapia."></video>
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-02-capa.jpg" src="vp-02.mp4" aria-label="Profissional da clínica mostra o caminho até a clínica e fala sobre tratamentos."></video>
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-03-capa.jpg" src="vp-03.mp4" aria-label="Fisioterapeuta da clínica explica um tema de saúde, com imagens de apoio."></video>
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-04-capa.jpg" src="vp-04.mp4" aria-label="Fisioterapeuta da clínica responde: pilates é só alongamento?"></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela">
+    <div class="bloco">
+      <div class="cabeca">
+        <h2>Depoimentos</h2>
+        <p>Clientes contam com as próprias palavras como foi a experiência na clínica.</p>
+      </div>
+      <div class="videos">
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-05-capa.jpg" src="vp-05.mp4" aria-label="Depoimento de uma cliente da clínica."></video>
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-06-capa.jpg" src="vp-06.mp4" aria-label="Depoimento de um cliente da clínica."></video>
+        <video controls playsinline preload="none" width="576" height="1024" poster="vp-07-capa.jpg" src="vp-07.mp4" aria-label="Depoimento de um cliente da clínica, dono de restaurante."></video>
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-08-capa.jpg" src="vp-08.mp4" aria-label="Depoimento de uma cliente da clínica."></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <div class="bloco dupla">
+      <div class="cabeca">
+        <h2>Varejo de pijamas</h2>
+        <p>Vídeos sobre o mercado de pijamas: como escolher produto além do gosto pessoal e o que dá para aprender com a Eberjey, uma das maiores marcas do mundo.</p>
+      </div>
+      <div class="videos dois">
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-09-capa.jpg" src="vp-09.mp4" aria-label="Vídeo sobre como escolher produtos para a loja além do gosto pessoal."></video>
+        <video controls playsinline preload="none" width="720" height="1280" poster="vp-10-capa.jpg" src="vp-10.mp4" aria-label="Análise da marca de pijamas Eberjey."></video>
+      </div>
+    </div>
+  </section>
+
+  <div class="fim"><a class="voltar" href="index.html">Voltar para o portfólio</a></div>
+</main>
+</body>
+</html>

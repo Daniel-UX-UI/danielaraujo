@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fit Urban</title>
+<meta name="description" content="Projeto de UX/UI de Daniel Araujo: as telas do site da Fit Urban.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap">
+<style>
+  /* Mesmo padrão das outras páginas de projeto: a primeira tela explica o trabalho e as seguintes, em branco e azul, mostram as telas desenhadas no Figma. Cada tela fica numa moldura que rola por dentro, porque as páginas são longas. */
+  :root { color-scheme: light; --azul: #1c1c1b; --branco: #f9efe7; --preto: #0a0a0a; --display: Geist, "Segoe UI", system-ui, sans-serif; --sans: Geist, "Segoe UI", system-ui, -apple-system, sans-serif; --texto: clamp(17px, 1.56vw, 30px); --titulo: clamp(42px, 4.6vw, 88px); --lateral: clamp(16px, 6.9vw, 132px); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--branco); color: var(--preto); font: 400 var(--texto)/1.32 var(--sans); letter-spacing: -.02em; -webkit-font-smoothing: antialiased; }
+  h1, h2, p { margin: 0; }
+  h1, h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.05em; font-size: var(--titulo); line-height: 1.1; text-wrap: balance; }
+  img { display: block; max-width: 100%; height: auto; }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+  .tela { position: relative; overflow: hidden; }
+  .azul { background: var(--azul); color: var(--branco); }
+  .botao { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 3px; background: var(--azul); color: var(--branco); font: 600 15px/20px var(--sans); text-decoration: none; white-space: nowrap; transition: background-color .15s ease; }
+  .botao:hover { background: #3a3936; }
+  .tela > .botao { position: absolute; z-index: 1; top: 16px; left: max(16px, env(safe-area-inset-left, 0px)); }
+
+  .abertura { display: grid; justify-items: center; align-content: center; gap: 1.1em; min-height: min(56.25vw, 1080px); padding: 96px 16px 64px; text-align: center; }
+  .abertura p { max-width: 30em; text-wrap: pretty; }
+  .selos { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: .9em; }
+  .selo { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 3px; background: #0a0a0a; color: var(--branco); font: 600 15px/20px var(--sans); }
+
+  .bloco { display: grid; gap: clamp(28px, 3vw, 56px); max-width: 1920px; margin-inline: auto; padding: clamp(56px, 6.5vw, 124px) var(--lateral); }
+  .cabeca { display: grid; gap: .8em; max-width: 34em; }
+  .cabeca p { text-wrap: pretty; }
+  .telas { display: flex; flex-wrap: wrap; align-items: flex-start; gap: clamp(16px, 2.4vw, 44px); }
+  .rolagem { flex: 0 1 auto; max-width: 100%; max-height: min(80vh, 900px); overflow-y: auto; border-radius: 3px; background: var(--branco); box-shadow: 0 0 0 1px rgba(10, 10, 10, .12); }
+  .dica { font-size: .7em; opacity: .8; }
+
+  .fim { display: flex; justify-content: center; padding: 48px 16px; }
+  @media (prefers-reduced-motion: reduce) { .botao { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="tela">
+    <a class="botao" href="index.html">Voltar para o portfólio</a>
+    <div class="abertura">
+      <h1>Fit Urban</h1>
+      <p>Redesenhei o site da Fit Urban, e-commerce de moda fitness: da pesquisa com usuários ao design system e às telas, validadas em testes.</p>
+      <div class="selos">
+        <span class="selo">Figma</span>
+        <a class="botao" href="https://www.fiturban.com.br/" target="_blank" rel="noopener">Ver o site no ar</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <div class="bloco">
+      <div class="cabeca">
+        <h2>Página inicial</h2>
+        <p>Campanha no topo, seguida de categorias, lançamentos, looks de influenciadoras, mais vendidos e redes sociais.</p>
+        <p class="dica">Role dentro das telas para ver a página inteira.</p>
+      </div>
+      <div class="telas">
+        <div class="rolagem"><img src="fd-home.jpg" width="484" height="2000" loading="lazy" alt="Página inicial desenhada para computador, do banner da coleção Seamless ao rodapé."></div>
+        <div class="rolagem"><img src="fd-home-cel.jpg" width="149" height="2000" loading="lazy" alt="Página inicial desenhada para celular."></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela">
+    <div class="bloco">
+      <div class="cabeca">
+        <h2>Categoria</h2>
+        <p>Lista de produtos com filtro, ordenação e troca de visualização. Uma versão mostra os looks completos das influenciadoras, com o preço do conjunto.</p>
+      </div>
+      <div class="telas">
+        <div class="rolagem"><img src="fd-cat-cel.webp" width="273" height="2000" loading="lazy" alt="Página da categoria de leggings desenhada para celular."></div>
+        <div class="rolagem"><img src="fd-cat-looks-cel.webp" width="316" height="2000" loading="lazy" alt="Página de categoria com os looks das influenciadoras, desenhada para celular."></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela azul">
+    <div class="bloco">
+      <div class="cabeca">
+        <h2>Produto</h2>
+        <p>Fotos lado a lado, cor e tamanho, vídeos do produto, compre o look, sugestões e avaliações.</p>
+      </div>
+      <div class="telas">
+        <div class="rolagem"><img src="fd-produto.jpg" width="803" height="2000" loading="lazy" alt="Página de produto desenhada para computador, com fotos, cores, tamanhos, compre o look e avaliações."></div>
+        <div class="rolagem"><img src="fd-produto-cel.webp" width="246" height="2000" loading="lazy" alt="Página de produto desenhada para celular."></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tela">
+    <div class="bloco">
+      <div class="cabeca">
+        <h2>Look da influenciadora</h2>
+        <p>Uma versão da página de produto mostra quem está usando o look, com altura, medidas e tamanho, e as peças para comprar juntas.</p>
+      </div>
+      <div class="telas">
+        <div class="rolagem"><img src="fd-look.jpg" width="918" height="2000" loading="lazy" alt="Página do look desenhada para computador, com as medidas da influenciadora e as peças do look."></div>
+        <div class="rolagem"><img src="fd-look-cel.webp" width="304" height="2000" loading="lazy" alt="Página do look desenhada para celular."></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fim"><a class="botao" href="index.html">Voltar para o portfólio</a></div>
+</main>
+</body>
+</html>

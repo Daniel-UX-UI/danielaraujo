@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alento</title>
+<meta name="description" content="Identidade visual de Daniel Araujo para a Alento, estúdio de pilates e bem-estar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap">
+<style>
+  /* As telas do projeto em sequência. No celular, as telas com texto pequeno ganham o mesmo texto logo abaixo. */
+  :root { color-scheme: light; --azul: #1c1c1b; --branco: #f9efe7; --sans: Geist, "Segoe UI", system-ui, -apple-system, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--branco); color: #1c1c1b; font: 400 17px/1.5 var(--sans); letter-spacing: -.02em; -webkit-font-smoothing: antialiased; }
+  main { position: relative; max-width: 1920px; margin-inline: auto; }
+  img { display: block; width: 100%; height: auto; }
+  figure { margin: 0; }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  .voltar { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 3px; background: var(--azul); color: var(--branco); font: 600 15px/20px var(--sans); text-decoration: none; white-space: nowrap; transition: background-color .15s ease; }
+  .voltar:hover { background: #3a3936; }
+  .topo { position: absolute; z-index: 1; top: 16px; left: max(16px, env(safe-area-inset-left, 0px)); }
+  .fim { display: flex; justify-content: center; padding: 48px 16px; }
+  figcaption { display: none; }
+  @media (max-width: 760px) {
+    figcaption { display: grid; gap: 12px; padding: 24px max(16px, env(safe-area-inset-left, 0px)); }
+    figcaption p { margin: 0; }
+    strong { font-weight: 600; }
+  }
+  @media (prefers-reduced-motion: reduce) { .voltar { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <a class="voltar topo" href="index.html">Voltar para o portfólio</a>
+  <img src="alento-01.jpg" width="1920" height="1080" alt="Logo da Alento sobre a foto de uma mulher praticando pilates com um anel em um estúdio de luz quente.">
+  <figure>
+    <img src="alento-02.jpg" width="1920" height="1080" alt="Fundo mostarda com parte do logo em grande escala e o texto: Alento é fôlego. Alento é ânimo. Puxar o arco é inspirar. Soltar a flecha é expirar.">
+    <figcaption>
+      <p><strong>Alento é fôlego. Alento é ânimo.</strong></p>
+      <p>Puxar o arco é inspirar. Soltar a flecha é expirar.</p>
+    </figcaption>
+  </figure>
+  <figure>
+    <img src="alento-03.jpg" width="1920" height="1080" alt="Construção do logo: alongamento mais arco e flecha é igual ao logo.">
+    <figcaption>
+      <p><strong>Alongamento:</strong> o corpo se abre e os braços sobem.</p>
+      <p><strong>Arco &amp; Flecha:</strong> a tensão guarda força e a flecha dá direção.</p>
+      <p><strong>Logo:</strong> um corpo em expansão, pronto para avançar.</p>
+    </figcaption>
+  </figure>
+  <img src="alento-04.jpg" width="1920" height="1080" alt="Logo da Alento em creme sobre fundo mostarda.">
+  <img src="alento-05.jpg" width="1920" height="1080" alt="Construção geométrica do logo e das letras sobre fundo preto, com grade e pontos de ancoragem.">
+  <img src="alento-06.jpg" width="1920" height="1080" alt="Cartões de visita da Alento sobre uma superfície de couro marrom.">
+  <img src="alento-07.jpg" width="1920" height="1080" alt="Envelopes brancos com o logo da Alento e parte do símbolo em marrom.">
+  <img src="alento-08.jpg" width="1920" height="1080" alt="Fachada de um estúdio com o logo da Alento e a placa Pilates e Bem-estar.">
+  <div class="fim"><a class="voltar" href="index.html">Voltar para o portfólio</a></div>
+</main>
+</body>
+</html>
